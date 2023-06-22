@@ -11,6 +11,7 @@ def start_game_against_the_computer():
     print("Please introduce your guess:")
     while ''.join(correct_number) != computer_number:
         attemps += 1
+        count = 0
         player_number = input("> ")
         if len(player_number) < 4 or len(player_number) > 4:
             print("Please enter a number of 4 digits")
@@ -21,7 +22,7 @@ def start_game_against_the_computer():
                 count += 1
             else:
                 continue
-            print(f"You did get {count} corrects numbers")
+        print(f"You did get {count} corrects numbers")
         print("Your progress is: ")
         print(*correct_number)
     if ''.join(correct_number) == computer_number:
