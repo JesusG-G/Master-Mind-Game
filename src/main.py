@@ -2,16 +2,15 @@ import random
 
 def start_game_against_the_computer():
     attemps = 0
+    count = 0
     print("The computer is choosing a number")
     computer_number = str(random.randrange(1000,10000))
     computer_number_lenght = len(computer_number)
     correct_number = ['X']*computer_number_lenght
-    print(computer_number)
-    print(computer_number_lenght)
-    print(correct_number)
     print("The computer had finish now!!!")
-    print("Please player introduce your guess:")
-    while True:
+    print("Please introduce your guess:")
+    while ''.join(correct_number) != computer_number:
+        attemps += 1
         player_number = input("> ")
         if len(player_number) < 4 or len(player_number) > 4:
             print("Please enter a number of 4 digits")
@@ -19,10 +18,15 @@ def start_game_against_the_computer():
         for i in range(computer_number_lenght):
             if player_number[i] == computer_number[i]:
                 correct_number[i] = player_number[i]
+                count += 1
             else:
-                attemps +=1
-        print(correct_number)
-        print(attemps)
+                continue
+            print(f"You did get {count} corrects numbers")
+        print("Your progress is: ")
+        print(*correct_number)
+    if ''.join(correct_number) == computer_number:
+        print("Congratulations you are a Master Mind!!!")
+        print(f"It took you {attemps} tries!")
 
 """def start_game_two_players():
     valid_number = False
