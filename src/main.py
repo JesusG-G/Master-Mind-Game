@@ -1,5 +1,15 @@
 import random
 
+def validate_input(player_input):
+    if not player_input.isnumeric():
+            print("Please enter a valid value")
+            return False
+    elif len(player_input) < 4 or len(player_input) > 4:
+            print("Please enter a number of 4 digits")
+            return False
+    else:
+        return True
+
 def start_game_against_the_computer():
     attemps = 0
     count = 0
@@ -13,34 +23,28 @@ def start_game_against_the_computer():
         attemps += 1
         count = 0
         player_number = input("> ")
-        if len(player_number) < 4 or len(player_number) > 4:
-            print("Please enter a number of 4 digits")
+        valid_number = validate_input(player_number)
+        if valid_number == False:
             continue
+        elif player_number == computer_number and attemps==1:
+            print("Congratulation you WON on your first try, you are a Master Mind!!!")
+            exit(0)
         for i in range(computer_number_lenght):
             if player_number[i] == computer_number[i]:
                 correct_number[i] = player_number[i]
                 count += 1
             else:
                 continue
-        print(f"You did get {count} corrects numbers")
-        print("Your progress is: ")
-        print(*correct_number)
+        if count == 0:
+             print("None of the numbers in your input match.")
+        else:
+            print(f"You did get {count} corrects numbers")
+            print("Your progress is: ")
+            print(*correct_number)
     if ''.join(correct_number) == computer_number:
         print("Congratulations you are a Master Mind!!!")
         print(f"It took you {attemps} tries!")
-
-def validate_input(player_input):
-    if not player_input.isnumeric():
-            print("Please enter a valid value")
-            return False
-    elif len(player_input) < 4 or len(player_input) > 4:
-            print("Please enter a number of 4 digits")
-            return False
-    else:
-        return True
-def win_message():
-    print("Congratulation you WON, you are a Master Mind!!!")
-    exit(0)  
+        exit(0)
   
 def start_game_two_players():
     valid_number = False
@@ -65,7 +69,8 @@ def start_game_two_players():
         if valid_number == False:
             continue
         elif  player_2_guess == player_1_guess and attemps_player_2 == 1:
-            win_message()
+            print("Congratulation you WON on your first try, you are a Master Mind!!!")
+            exit(0)
  
         for i in range(guess_number_lenght):
             if player_2_guess[i] == player_1_guess[i]:
@@ -102,7 +107,8 @@ def start_game_two_players():
         if valid_number == False:
             continue
         elif player_1_guess == player_2_guess and attemps_player_1 == 1:
-            win_message()
+            print("Congratulation you WON on your first try, you are a Master Mind!!!")
+            exit(0)
 
         for i in range(guess_number_lenght):
             if player_1_guess[i] == player_2_guess[i]:
